@@ -39,6 +39,14 @@ function collectState() {
  */
 function render(action) {
     let state = collectState(); // состояние полей из таблицы
+
+    const from = state.totalFrom === '' ? undefined : parseFloat(state.totalFrom);
+    const to   = state.totalTo === '' ? undefined : parseFloat(state.totalTo);
+    state.total = [from, to];          // для arrayAsRange
+
+    delete state.totalFrom;
+    delete state.totalTo; 
+
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
     result = applySearching(result, state, action);
